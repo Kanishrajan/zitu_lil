@@ -22,16 +22,18 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 type SettingsItemProps = {
   icon: React.ElementType;
   text: string;
   description?: string;
+  href?: string;
   onClick?: () => void;
 };
 
-function SettingsItem({ icon: Icon, text, description, onClick }: SettingsItemProps) {
-  return (
+function SettingsItem({ icon: Icon, text, description, href, onClick }: SettingsItemProps) {
+  const content = (
     <div
       onClick={onClick}
       className="flex items-center justify-between p-4 rounded-lg bg-card cursor-pointer hover:bg-accent"
@@ -46,6 +48,12 @@ function SettingsItem({ icon: Icon, text, description, onClick }: SettingsItemPr
       <ChevronRight className="w-5 h-5 text-muted-foreground" />
     </div>
   );
+
+  if (href) {
+    return <Link href={href}>{content}</Link>;
+  }
+
+  return content;
 }
 
 type SectionTitleProps = {
@@ -76,9 +84,9 @@ export default function SettingsPage() {
         
         <SectionTitle title="Account" />
         <div className="space-y-2">
-            <SettingsItem icon={User} text="Edit Profile" description="Update name, bio, and profile photo" />
-            <SettingsItem icon={AtSign} text="Change Email or Phone" />
-            <SettingsItem icon={Lock} text="Change Password" />
+            <SettingsItem icon={User} text="Edit Profile" description="Update name, bio, and profile photo" href="/settings/profile" />
+            <SettingsItem icon={AtSign} text="Change Email or Phone" href="/settings/email-phone" />
+            <SettingsItem icon={Lock} text="Change Password" href="/settings/password" />
         </div>
 
         <Separator />
