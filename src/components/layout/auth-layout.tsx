@@ -8,12 +8,13 @@ import BottomNav from './bottom-nav';
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = pathname === '/login' || pathname === '/signup';
+  const isBiddingArena = pathname.startsWith('/bidding/');
 
   // A simple check to see if we should show the main layout
   // In a real app, you'd have a proper auth state check
-  const showMainLayout = !isAuthPage;
+  const showMainLayout = !isAuthPage && !isBiddingArena;
 
-  if (isAuthPage) {
+  if (isAuthPage || isBiddingArena) {
     return <main>{children}</main>;
   }
 

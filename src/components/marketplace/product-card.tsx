@@ -18,6 +18,7 @@ import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
 
 type Product = {
   id: number;
@@ -70,26 +71,30 @@ export function ProductCard({ product }: ProductCardProps) {
     setBidAmount('');
   };
 
+  const buttonContent = isOffer ? 'Negotiate' : 'Place Bid';
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <Card className="overflow-hidden border-none bg-transparent shadow-none">
         <CardContent className="p-0 space-y-2">
-          <div className="relative aspect-square w-full overflow-hidden rounded-lg">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              fill
-              className="object-cover transition-transform hover:scale-105"
-              data-ai-hint={product.imageHint || 'product photo'}
-            />
-          </div>
+          <Link href={`/bidding/${product.id}`} className="block">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                fill
+                className="object-cover transition-transform hover:scale-105"
+                data-ai-hint={product.imageHint || 'product photo'}
+              />
+            </div>
+          </Link>
           <h3 className="text-sm font-medium">{product.name}</h3>
           <p className="text-xs text-muted-foreground">
             {isOffer ? 'Accepting Offers' : `Starts at $${product.price}`}
           </p>
           <DialogTrigger asChild>
             <Button variant={isOffer ? 'secondary' : 'default'} className="w-full h-9 text-sm">
-              {isOffer ? 'Negotiate' : 'Place Bid'}
+              {buttonContent}
             </Button>
           </DialogTrigger>
         </CardContent>
