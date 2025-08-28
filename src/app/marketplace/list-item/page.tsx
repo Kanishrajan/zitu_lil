@@ -18,9 +18,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { ImageUp, Loader2 } from 'lucide-react';
+import { ImageUp, Loader2, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { suggestProductInfo } from '@/ai/flows/suggest-product-info-flow';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -35,8 +36,19 @@ const formSchema = z.object({
   image: z.any().refine((file) => file instanceof File, 'Image is required.'),
 });
 
+// Helper to convert file to data URI
+const toDataUri = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+};
+
 export default function ListItemPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const router = useRouter();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,6 +59,51 @@ export default function ListItemPage() {
       price: '',
     },
   });
+
+  const handleGenerate = async () => {
+      const name = form.getValues('name');
+      const imageFile = form.getValues('image');
+
+      if (!name || !imageFile) {
+          toast({
+              title: 'Name and Image Required',
+              description: 'Please provide a product name and image to generate details.',
+              variant: 'destructive',
+          });
+          return;
+      }
+
+      setIsGenerating(true);
+      try {
+          const imageDataUri = await toDataUri(imageFile);
+          const result = await suggestProductInfo({
+              productName: name,
+              photoDataUri: imageDataUri,
+          });
+
+          if (result.description) {
+              form.setValue('description', result.description, { shouldValidate: true });
+          }
+          if (result.suggestedPrice) {
+              form.setValue('price', result.suggestedPrice.toString(), { shouldValidate: true });
+          }
+
+          toast({
+              title: 'AI Suggestions Applied!',
+              description: 'The description and price have been filled in for you.',
+          });
+
+      } catch (error) {
+          console.error('Error generating product info:', error);
+          toast({
+              title: 'AI Generation Failed',
+              description: 'There was an error generating suggestions. Please try again.',
+              variant: 'destructive',
+          });
+      } finally {
+          setIsGenerating(false);
+      }
+  };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
@@ -86,39 +143,6 @@ export default function ListItemPage() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Describe your product in detail..."
-                      className="resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price ($) or "Offer"</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. 250 or Offer" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Enter a price in USD or type 'Offer' to accept negotiations.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
              <FormField
                 control={form.control}
                 name="image"
@@ -129,8 +153,8 @@ export default function ListItemPage() {
                         <div className="relative flex items-center justify-center w-full">
                             <label htmlFor="image-upload" className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer bg-card hover:bg-accent">
                                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                    {value ? (
-                                        <p className='text-sm text-muted-foreground'>{value.name}</p>
+                                    {form.watch('image') ? (
+                                        <p className='text-sm text-muted-foreground'>{form.watch('image').name}</p>
                                     ) : (
                                         <>
                                             <ImageUp className="w-8 h-8 mb-4 text-muted-foreground" />
@@ -147,6 +171,58 @@ export default function ListItemPage() {
                     </FormItem>
                 )}
                 />
+            <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                    <FormLabel>Description</FormLabel>
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleGenerate}
+                        disabled={isGenerating}
+                    >
+                        {isGenerating ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                            <Sparkles className="mr-2 h-4 w-4" />
+                        )}
+                        Generate with AI
+                    </Button>
+                </div>
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem className="!mt-0">
+                      <FormControl>
+                        <Textarea
+                          placeholder="Describe your product in detail..."
+                          className="resize-none"
+                          rows={5}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+            </div>
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price ($) or "Offer"</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g. 250 or Offer" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Enter a price in USD or type 'Offer' to accept negotiations.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isSubmitting ? 'Listing Item...' : 'List Item'}
