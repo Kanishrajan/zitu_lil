@@ -20,24 +20,17 @@ const products = [
 
 export default function Home() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // In a real app, you'd check a token, session, or make an API call.
-    // We'll simulate this by checking sessionStorage.
     const authStatus = sessionStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
-    setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!authStatus) {
       router.push('/login');
     }
-  }, [isLoading, isAuthenticated, router]);
+  }, [router]);
 
-  if (isLoading || !isAuthenticated) {
+  if (isAuthenticated === null) {
     return (
         <div className="container mx-auto px-4 py-4">
              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -52,21 +45,25 @@ export default function Home() {
     );
   }
 
-  return (
-    <div className="container mx-auto px-4 py-4">
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div className='space-y-1'>
-            <h1 className="text-3xl font-bold tracking-tight">For You</h1>
-            <p className="text-muted-foreground">Products we think you'll love.</p>
+  if (isAuthenticated) {
+    return (
+      <div className="container mx-auto px-4 py-4">
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div className='space-y-1'>
+              <h1 className="text-3xl font-bold tracking-tight">For You</h1>
+              <p className="text-muted-foreground">Products we think you'll love.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 }
