@@ -50,8 +50,8 @@ export default function PaymentPage({ params }: { params: { id: string } }) {
         title: 'Payment Successful!',
         description: 'Your funds are held securely until delivery is confirmed.',
     });
-    // Here you would redirect to an order tracking page
-    // router.push(`/orders/${product.id}`);
+    // Redirect to the order tracking page
+    router.push(`/orders/${product.id}`);
   }
 
   return (
@@ -136,4 +136,3 @@ export default function PaymentPage({ params }: { params: { id: string } }) {
     </div>
   );
 }
-
