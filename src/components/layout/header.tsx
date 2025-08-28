@@ -55,7 +55,7 @@ export default function Header() {
               </Link>
             </Button>
             <Button asChild variant="ghost" size="icon">
-              <Link href="#">
+              <Link href="/notifications">
                 <Bell />
                 <span className="sr-only">Notifications</span>
               </Link>
