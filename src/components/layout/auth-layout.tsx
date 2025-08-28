@@ -10,12 +10,13 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
   const isAuthPage = pathname === '/login' || pathname === '/signup';
   const isBiddingArena = pathname.startsWith('/bidding/');
   const isSettingsOrLeaderboard = pathname.startsWith('/settings') || pathname.startsWith('/leaderboard');
+  const isChatPage = pathname.startsWith('/messages/');
 
 
   // A simple check to see if we should show the main layout
   // In a real app, you'd have a proper auth state check
-  const showBottomNav = !isAuthPage && !isBiddingArena && !isSettingsOrLeaderboard;
-  const showHeader = !isAuthPage && !isBiddingArena;
+  const showBottomNav = !isAuthPage && !isBiddingArena && !isSettingsOrLeaderboard && !isChatPage;
+  const showHeader = !isAuthPage && !isBiddingArena && !isChatPage;
 
   return (
     <div className="relative flex min-h-dvh w-full flex-col bg-background">

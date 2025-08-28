@@ -22,9 +22,7 @@ function ChatListItem({ chat }: { chat: typeof chats[0] }) {
     const router = useRouter();
 
     const handleChatClick = () => {
-        // In a real app, this would navigate to the specific chat window
-        // e.g., router.push(`/messages/${chat.id}`);
-        console.log(`Navigating to chat with ${chat.company}`);
+        router.push(`/messages/${chat.id}`);
     }
 
     return (
