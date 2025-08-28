@@ -35,7 +35,6 @@ type SettingsItemProps = {
 function SettingsItem({ icon: Icon, text, description, href, onClick }: SettingsItemProps) {
   const content = (
     <div
-      onClick={onClick}
       className="flex items-center justify-between p-4 rounded-lg bg-card cursor-pointer hover:bg-accent"
     >
       <div className="flex items-center gap-4">
@@ -49,11 +48,11 @@ function SettingsItem({ icon: Icon, text, description, href, onClick }: Settings
     </div>
   );
 
-  if (href) {
-    return <Link href={href}>{content}</Link>;
-  }
+  const RootComponent = href ? Link : 'div';
+  const rootProps = href ? { href } : { onClick };
 
-  return content;
+
+  return <RootComponent {...rootProps}>{content}</RootComponent>;
 }
 
 type SectionTitleProps = {
@@ -93,29 +92,29 @@ export default function SettingsPage() {
 
         <SectionTitle title="Privacy & Security" />
         <div className="space-y-2">
-            <SettingsItem icon={ShieldCheck} text="Two-Factor Authentication" />
-            <SettingsItem icon={Eye} text="Profile Visibility" description="Control who can see your profile" />
-            <SettingsItem icon={Ban} text="Blocked Users" />
-            <SettingsItem icon={Download} text="Download Your Data" />
-            <SettingsItem icon={Trash2} text="Delete Account" />
+            <SettingsItem icon={ShieldCheck} text="Two-Factor Authentication" href="/settings/two-factor" />
+            <SettingsItem icon={Eye} text="Profile Visibility" description="Control who can see your profile" href="/settings/visibility" />
+            <SettingsItem icon={Ban} text="Blocked Users" href="/settings/blocked" />
+            <SettingsItem icon={Download} text="Download Your Data" href="/settings/data" />
+            <SettingsItem icon={Trash2} text="Delete Account" href="/settings/delete-account" />
         </div>
 
         <Separator />
         
         <SectionTitle title="Preferences" />
         <div className="space-y-2">
-            <SettingsItem icon={Bell} text="Notifications" description="Adjust your notification preferences" />
-            <SettingsItem icon={Brush} text="Appearance" description="Customize the look and feel" />
-            <SettingsItem icon={Languages} text="Language & Currency" />
+            <SettingsItem icon={Bell} text="Notifications" description="Adjust your notification preferences" href="/settings/notifications" />
+            <SettingsItem icon={Brush} text="Appearance" description="Customize the look and feel" href="/settings/appearance" />
+            <SettingsItem icon={Languages} text="Language & Currency" href="/settings/language" />
         </div>
 
         <Separator />
 
         <SectionTitle title="Support & About" />
         <div className="space-y-2">
-            <SettingsItem icon={HelpCircle} text="Help & Support" />
-            <SettingsItem icon={FileText} text="Terms & Conditions" />
-            <SettingsItem icon={FileText} text="Privacy Policy" />
+            <SettingsItem icon={HelpCircle} text="Help & Support" href="/settings/help" />
+            <SettingsItem icon={FileText} text="Terms & Conditions" href="/settings/terms" />
+            <SettingsItem icon={FileText} text="Privacy Policy" href="/settings/privacy" />
         </div>
 
         <Separator />
