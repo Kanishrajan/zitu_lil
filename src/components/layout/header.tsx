@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bell, MessageSquare } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 
@@ -10,11 +10,16 @@ export default function Header() {
         <Logo />
       </Link>
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" aria-label="Messages">
-          <MessageSquare className="h-5 w-5" />
+        <Button asChild variant="ghost">
+            <Link href="/login">
+                <LogIn className="mr-2 h-4 w-4" />
+                Login
+            </Link>
         </Button>
-        <Button variant="ghost" size="icon" aria-label="Notifications">
-          <Bell className="h-5 w-5" />
+        <Button asChild>
+            <Link href="/signup">
+                Sign Up
+            </Link>
         </Button>
       </div>
     </header>
