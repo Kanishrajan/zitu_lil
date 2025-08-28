@@ -30,17 +30,24 @@ export const useCountdown = (targetDate: Date) => {
         setIsEnded(false);
       } else {
         setIsEnded(true);
+        timeLeftString = ''; // Ensure empty string when ended
       }
       
       return timeLeftString;
     };
     
+    // Set initial value
     setTimeLeft(calculateTimeLeft());
+    if (+new Date(targetDate) - +new Date() <= 0) {
+      setIsEnded(true);
+    }
     
     const timer = setInterval(() => {
-      const newTimeLeft = calculateTime-left();
+      const newTimeLeft = calculateTimeLeft();
       setTimeLeft(newTimeLeft);
+
       if (newTimeLeft === '') {
+        setIsEnded(true);
         clearInterval(timer);
       }
     }, 1000);
