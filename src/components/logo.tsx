@@ -17,9 +17,10 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
         y="50%"
         dominantBaseline="middle"
         textAnchor="middle"
-        fontFamily="Brush Script MT, Brush Script Std, cursive"
-        fontSize="30"
-        fontStyle="italic"
+        fontFamily="sans-serif"
+        fontSize="32"
+        fontWeight="bold"
+        letterSpacing="-1"
       >
         ZITU
       </text>
