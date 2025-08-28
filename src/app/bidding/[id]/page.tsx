@@ -28,7 +28,7 @@ const product = {
   basePrice: '250',
   imageUrl: 'https://picsum.photos/seed/watch/500/500',
   imageHint: 'elegant watch',
-  endDate: new Date(Date.now() + 1000 * 60 * 5), // 5 minutes from now
+  endDate: new Date(Date.now() + 1000 * 50), // 50 seconds from now
 };
 
 const bidders = [
@@ -44,6 +44,7 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
   const [bidAmount, setBidAmount] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { timeLeft, isEnded } = useCountdown(product.endDate);
+  const { toast } = useToast();
 
 
   const handleBidSubmit = async () => {
