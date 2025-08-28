@@ -18,7 +18,8 @@ import { BiddingLeaderboard } from '@/components/bidding/leaderboard';
 import { Timer, ArrowLeft, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
+import { useCountdown } from '@/hooks/use-countdown';
 
 // Mock data, in a real app you would fetch this based on the [id]
 const product = {
@@ -42,6 +43,8 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
   const [isOpen, setIsOpen] = useState(false);
   const [bidAmount, setBidAmount] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { timeLeft, isEnded } = useCountdown(product.endDate);
+
 
   const handleBidSubmit = async () => {
     if (!bidAmount) {
@@ -110,21 +113,21 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
               <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-card border my-4">
                   <Timer className="h-6 w-6 text-primary" />
                   <p className="text-lg font-semibold tabular-nums">
-                      Auction ends in: <span className="text-primary">04:59</span>
+                      {isEnded ? 'Auction has ended' : 'Auction ends in:'} <span className="text-primary">{!isEnded && timeLeft}</span>
                   </p>
               </div>
 
 
               {/* Leaderboard */}
               <div className="flex-grow">
-                  <BiddingLeaderboard bidders={bidders} />
+                  <BiddingLeaderboard bidders={bidders} isEnded={isEnded} />
               </div>
           </main>
           
           <footer className="sticky bottom-4">
               <DialogTrigger asChild>
-                <Button className="w-full h-14 text-lg font-bold">
-                    Place New Bid
+                <Button className="w-full h-14 text-lg font-bold" disabled={isEnded}>
+                    {isEnded ? 'Auction Ended' : 'Place New Bid'}
                 </Button>
               </DialogTrigger>
           </footer>

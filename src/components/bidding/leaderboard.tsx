@@ -17,6 +17,7 @@ type Bidder = {
 
 type BiddingLeaderboardProps = {
   bidders: Bidder[];
+  isEnded?: boolean;
 };
 
 function formatTimeAgo(timestamp: Date): string {
@@ -32,7 +33,7 @@ function formatTimeAgo(timestamp: Date): string {
   return `${hours}h ago`;
 }
 
-export function BiddingLeaderboard({ bidders }: BiddingLeaderboardProps) {
+export function BiddingLeaderboard({ bidders, isEnded = false }: BiddingLeaderboardProps) {
     const sortedBidders = [...bidders].sort((a, b) => b.bidAmount - a.bidAmount);
     const topBidder = sortedBidders[0];
 
@@ -49,7 +50,8 @@ export function BiddingLeaderboard({ bidders }: BiddingLeaderboardProps) {
                             className={cn(
                                 "flex items-center gap-4 p-3 rounded-lg transition-all duration-300",
                                 bidder.id === topBidder.id ? "bg-primary/10 border-primary/50 border" : "bg-card border",
-                                bidder.isCurrentUser && "ring-2 ring-primary ring-offset-2 ring-offset-background"
+                                bidder.isCurrentUser && "ring-2 ring-primary ring-offset-2 ring-offset-background",
+                                isEnded && bidder.id === topBidder.id && "bg-amber-400/20 border-amber-500"
                             )}
                         >
                             <span className="font-bold text-lg w-6 text-center">{index + 1}</span>
@@ -62,11 +64,14 @@ export function BiddingLeaderboard({ bidders }: BiddingLeaderboardProps) {
                                 <p className="text-sm text-muted-foreground">{formatTimeAgo(bidder.timestamp)}</p>
                             </div>
                             <div className="text-right">
-                                <p className="font-bold text-lg text-primary">${bidder.bidAmount}</p>
+                                <p className={cn("font-bold text-lg", isEnded && bidder.id === topBidder.id ? "text-amber-500" : "text-primary")}>${bidder.bidAmount}</p>
                                 {bidder.id === topBidder.id && (
-                                    <div className="flex items-center justify-end gap-1 text-xs text-amber-500">
+                                    <div className={cn(
+                                        "flex items-center justify-end gap-1 text-xs",
+                                        isEnded ? "text-amber-600 font-semibold" : "text-amber-500"
+                                    )}>
                                         <Crown className="h-3 w-3 fill-current" />
-                                        <span>Highest Bid</span>
+                                        <span>{isEnded ? "Winner" : "Highest Bid"}</span>
                                     </div>
                                 )}
                             </div>
