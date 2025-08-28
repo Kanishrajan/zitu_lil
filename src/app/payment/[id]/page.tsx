@@ -9,7 +9,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
 import {
   Carousel,
   CarouselContent,
