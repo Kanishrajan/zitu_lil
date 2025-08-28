@@ -3,6 +3,7 @@ import { Grid3x3, Bookmark } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { EmptyState } from '@/components/layout/empty-state';
 
 const user = {
   name: 'ZITU User',
@@ -75,12 +76,12 @@ export default function NetworkPage() {
               ))}
             </div>
           </TabsContent>
-          <TabsContent value="saved" className="mt-0">
-             <div className="flex flex-col items-center justify-center h-64 gap-2 text-center">
-                <Bookmark className="w-12 h-12 text-muted-foreground" />
-                <h3 className="font-bold text-lg">Saved Posts</h3>
-                <p className="text-muted-foreground text-sm max-w-xs">Your saved posts from the feed and marketplace will appear here.</p>
-            </div>
+          <TabsContent value="saved" className="mt-0 h-96">
+            <EmptyState 
+              icon={Bookmark}
+              title="No Saved Posts"
+              description="Your saved posts from the feed and marketplace will appear here."
+            />
           </TabsContent>
         </Tabs>
       </div>
