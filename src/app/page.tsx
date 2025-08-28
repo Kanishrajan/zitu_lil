@@ -10,8 +10,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 const posts = [
   {
     id: 1,
-    username: 'minimal_living',
-    avatarUrl: 'https://picsum.photos/id/10/100/100',
+    username: 'IKEA',
+    avatarUrl: 'https://picsum.photos/seed/ikea/100/100',
     imageUrl: 'https://picsum.photos/seed/livingroom/600/800',
     caption: 'Our new collection of minimalist furniture is here to bring peace to your space. ✨',
     likes: 1345,
@@ -20,8 +20,8 @@ const posts = [
   },
   {
     id: 2,
-    username: 'urban_oasis',
-    avatarUrl: 'https://picsum.photos/id/11/100/100',
+    username: 'UrbanLadder',
+    avatarUrl: 'https://picsum.photos/seed/urban/100/100',
     imageUrl: 'https://picsum.photos/seed/plants/600/700',
     caption: 'Bringing the outdoors in. Find the perfect plant for your home in our marketplace! 🌿',
     likes: 2109,
@@ -30,8 +30,8 @@ const posts = [
   },
   {
     id: 3,
-    username: 'cozy_corners',
-    avatarUrl: 'https://picsum.photos/id/12/100/100',
+    username: 'Pepperfry',
+    avatarUrl: 'https://picsum.photos/seed/pepperfry/100/100',
     imageUrl: 'https://picsum.photos/seed/bedroom/600/750',
     caption: 'Handcrafted beds and decor for your dream bedroom. #homedecor #interiordesign',
     likes: 987,

@@ -1,15 +1,16 @@
+
 import { Search } from 'lucide-react';
 import { BusinessCard } from '@/components/discover/business-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 const businesses = [
-  { id: 1, name: 'Scandi Living', category: 'Furniture', region: 'Copenhagen', imageUrl: 'https://picsum.photos/seed/scandi/600/400', isTrending: true, imageHint: 'scandinavian furniture' },
-  { id: 2, name: 'Boho Boutique', category: 'Decor', region: 'Byron Bay', imageUrl: 'https://picsum.photos/seed/boho/600/400', isTrending: false, imageHint: 'bohemian decor' },
-  { id: 3, name: 'Modern Kitchens', category: 'Kitchenware', region: 'Milan', imageUrl: 'https://picsum.photos/seed/kitchen/600/400', isTrending: true, imageHint: 'modern kitchen' },
-  { id: 4, name: 'The Green Shelf', category: 'Plants', region: 'Online', imageUrl: 'https://picsum.photos/seed/plantdecor/600/400', isTrending: false, imageHint: 'indoor plants' },
-  { id: 5, name: 'Artisan Textiles', category: 'Rugs & Throws', region: 'Marrakesh', imageUrl: 'https://picsum.photos/seed/textiles/600/400', isTrending: false, imageHint: 'artisan textiles' },
-  { id: 6, name: 'Industrial Light Co.', category: 'Lighting', region: 'Brooklyn', imageUrl: 'https://picsum.photos/seed/lighting/600/400', isTrending: true, imageHint: 'industrial lighting' },
+  { id: 1, name: 'IKEA', category: 'Furniture', region: 'Copenhagen', imageUrl: 'https://picsum.photos/seed/scandi/600/400', isTrending: true, imageHint: 'scandinavian furniture' },
+  { id: 2, name: 'UrbanLadder', category: 'Decor', region: 'Byron Bay', imageUrl: 'https://picsum.photos/seed/boho/600/400', isTrending: false, imageHint: 'bohemian decor' },
+  { id: 3, name: 'Pepperfry', category: 'Kitchenware', region: 'Milan', imageUrl: 'https://picsum.photos/seed/kitchen/600/400', isTrending: true, imageHint: 'modern kitchen' },
+  { id: 4, name: 'Samsung', category: 'Electronics', region: 'Online', imageUrl: 'https://picsum.photos/seed/plantdecor/600/400', isTrending: false, imageHint: 'galaxy phone' },
+  { id: 5, name: 'Apple Inc.', category: 'Electronics', region: 'Cupertino', imageUrl: 'https://picsum.photos/seed/textiles/600/400', isTrending: false, imageHint: 'apple iphone' },
+  { id: 6, name: 'OnePlus', category: 'Electronics', region: 'Brooklyn', imageUrl: 'https://picsum.photos/seed/lighting/600/400', isTrending: true, imageHint: 'oneplus phone' },
 ];
 
 export default function DiscoverPage() {
