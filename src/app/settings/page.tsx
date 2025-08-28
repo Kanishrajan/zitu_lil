@@ -83,7 +83,7 @@ export default function SettingsPage() {
         
         <SectionTitle title="Account" />
         <div className="space-y-2">
-            <SettingsItem icon={User} text="Edit Profile" description="Update name, bio, and profile photo" href="/settings/profile" />
+            <SettingsItem icon={User} text="Edit Profile" description="Update name, bio, and profile photo" href="/settings/profile/personal" />
             <SettingsItem icon={AtSign} text="Change Email or Phone" href="/settings/email-phone" />
             <SettingsItem icon={Lock} text="Change Password" href="/settings/password" />
         </div>

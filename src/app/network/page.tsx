@@ -1,9 +1,11 @@
+
 import Image from 'next/image';
 import { Grid3x3, Bookmark } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EmptyState } from '@/components/layout/empty-state';
+import Link from 'next/link';
 
 const user = {
   name: 'ZITU User',
@@ -16,9 +18,9 @@ const user = {
 };
 
 const posts = [
-  { id: 1, imageUrl: 'https://picsum.photos/seed/post1/500/500', imageHint: 'city skyline' },
-  { id: 2, imageUrl: 'https://picsum.photos/seed/post2/500/500', imageHint: 'abstract art' },
-  { id: 3, imageUrl: 'https://picsum.photos/seed/post3/500/500', imageHint: 'minimalist interior' },
+  { id: 1, imageUrl: 'https://picsum.photos/seed/watch_feed/500/500', imageHint: 'elegant watch' },
+  { id: 2, imageUrl: 'https://picsum.photos/seed/sunglasses_feed/500/500', imageHint: 'classic sunglasses' },
+  { id: 3, imageUrl: 'https://picsum.photos/seed/handbag/500/500', imageHint: 'designer handbag' },
   { id: 4, imageUrl: 'https://picsum.photos/seed/post4/500/500', imageHint: 'nature landscape' },
   { id: 5, imageUrl: 'https://picsum.photos/seed/post5/500/500', imageHint: 'street photography' },
   { id: 6, imageUrl: 'https://picsum.photos/seed/post6/500/500', imageHint: 'food photography' },
@@ -54,7 +56,9 @@ export default function NetworkPage() {
             <p className="text-sm">{user.bio}</p>
           </div>
           <div className="mt-4">
-            <Button variant="secondary" className="w-full">Edit Profile</Button>
+            <Button asChild variant="secondary" className="w-full">
+              <Link href="/settings/profile">Edit Profile</Link>
+            </Button>
           </div>
         </div>
 
