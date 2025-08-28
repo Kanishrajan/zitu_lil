@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Send } from 'lucide-react';
+import { useState } from 'react';
 
 // Mock data, in a real app you would fetch this based on the [id]
 const posts = [
@@ -42,13 +43,15 @@ const posts = [
   },
 ];
 
-const commentsData = [
+const initialComments = [
     { id: 1, username: 'design_lover', avatarUrl: 'https://picsum.photos/id/15/100/100', text: 'Absolutely stunning! Where can I get that chair?' },
     { id: 2, username: 'zitu_user', avatarUrl: 'https://picsum.photos/id/237/100/100', text: 'Love this aesthetic. So clean and calming.' },
     { id: 3, username: 'homebody', avatarUrl: 'https://picsum.photos/id/18/100/100', text: 'This is my dream living room! 😍' },
 ];
 
-function Comment({ comment }: { comment: typeof commentsData[0] }) {
+type CommentData = typeof initialComments[0];
+
+function Comment({ comment }: { comment: CommentData }) {
     return (
         <div className="flex items-start gap-3">
             <Avatar className="h-8 w-8">
@@ -67,6 +70,22 @@ function Comment({ comment }: { comment: typeof commentsData[0] }) {
 
 export default function PostPage({ params }: { params: { id: string } }) {
   const post = posts.find((p) => p.id.toString() === params.id);
+  const [comments, setComments] = useState(initialComments);
+  const [newComment, setNewComment] = useState('');
+
+  const handleCommentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newComment.trim()) {
+        const commentToAdd: CommentData = {
+            id: Date.now(),
+            username: 'zitu_user', // Mocked current user
+            avatarUrl: 'https://picsum.photos/id/237/100/100',
+            text: newComment,
+        };
+        setComments([...comments, commentToAdd]);
+        setNewComment('');
+    }
+  };
 
   if (!post) {
     return <div className="container mx-auto max-w-2xl px-4 py-4 text-center">Post not found.</div>;
@@ -80,17 +99,22 @@ export default function PostPage({ params }: { params: { id: string } }) {
         <div className="p-4 space-y-4">
             <h2 className="text-lg font-semibold">Comments</h2>
             <div className="space-y-4">
-                {commentsData.map(comment => <Comment key={comment.id} comment={comment} />)}
+                {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
             </div>
         </div>
         <Separator />
-        <div className="p-4 flex items-center gap-2">
-            <Input placeholder="Add a comment..." className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0" />
-            <Button variant="ghost" size="icon">
+        <form onSubmit={handleCommentSubmit} className="p-4 flex items-center gap-2">
+            <Input 
+                placeholder="Add a comment..." 
+                className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+            />
+            <Button type="submit" variant="ghost" size="icon">
                 <Send className="h-5 w-5" />
                 <span className="sr-only">Post Comment</span>
             </Button>
-        </div>
+        </form>
       </div>
     </div>
   );

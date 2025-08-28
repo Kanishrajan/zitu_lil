@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import { Grid3x3, Bookmark, Settings } from 'lucide-react';
+import { Grid3x3, Bookmark } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import Link from 'next/link';
 
 const user = {
   name: 'ZITU User',
@@ -53,14 +52,8 @@ export default function NetworkPage() {
             <h1 className="text-lg font-semibold">{user.name}</h1>
             <p className="text-sm">{user.bio}</p>
           </div>
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <Button variant="secondary" className="w-full col-span-2">Edit Profile</Button>
-            <Button variant="secondary" size="icon" asChild>
-              <Link href="/settings">
-                <Settings />
-                <span className="sr-only">Settings</span>
-              </Link>
-            </Button>
+          <div className="mt-4">
+            <Button variant="secondary" className="w-full">Edit Profile</Button>
           </div>
         </div>
 
