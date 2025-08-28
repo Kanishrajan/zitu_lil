@@ -1,4 +1,11 @@
+
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { PostCard } from '@/components/feed/post-card';
+import { Skeleton } from '@/components/ui/skeleton';
+
 
 const posts = [
   {
@@ -33,6 +40,40 @@ const posts = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // In a real app, you'd check a token, session, or make an API call.
+    // We'll simulate this with a timeout.
+    const timer = setTimeout(() => {
+        // For now, we'll assume the user is not authenticated.
+        const authStatus = false; 
+        setIsAuthenticated(authStatus);
+        setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  if (isLoading || !isAuthenticated) {
+    return (
+        <div className="container mx-auto max-w-2xl px-0 sm:px-4 py-4">
+            <div className="space-y-6">
+                <Skeleton className="h-[700px] w-full" />
+                <Skeleton className="h-[700px] w-full" />
+            </div>
+        </div>
+    );
+  }
+
   return (
     <div className="container mx-auto max-w-2xl px-0 sm:px-4 py-4">
       <div className="space-y-6">
