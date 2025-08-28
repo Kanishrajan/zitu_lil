@@ -4,6 +4,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LeaderboardCard, LeaderboardUser } from '@/components/leaderboard/leaderboard-card';
 import { Globe, Map, Pin } from 'lucide-react';
+import Link from 'next/link';
 
 const globalUsers: LeaderboardUser[] = [
   { id: 1, rank: 1, name: 'Eco Furnish', avatarUrl: 'https://picsum.photos/id/101/200', points: 12550, sold: 120, won: 15, region: 'India', tier: 'Diamond', progress: 78 },
@@ -34,7 +35,11 @@ function LeaderboardList({ users }: { users: LeaderboardUser[] }) {
     return (
         <div className="space-y-3">
             {users.map(user => (
-                <LeaderboardCard key={user.id} user={user} isCurrentUser={user.id === currentUserId} />
+                <Link key={user.id} href={`/profile/${user.id}`} legacyBehavior>
+                    <a href={`/profile/${user.id}`}>
+                        <LeaderboardCard user={user} isCurrentUser={user.id === currentUserId} />
+                    </a>
+                </Link>
             ))}
         </div>
     )
