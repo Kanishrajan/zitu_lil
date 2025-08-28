@@ -10,8 +10,9 @@ import { usePathname, useRouter } from 'next/navigation';
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
-  const showProfileSpecificHeader = pathname === '/network' || pathname === '/settings';
-  const isSettingsSubPage = pathname.startsWith('/settings/')
+  const isProfilePage = pathname === '/network';
+  const isSettingsPage = pathname === '/settings';
+  const isSettingsSubPage = pathname.startsWith('/settings/');
 
   const handleBack = () => {
     router.back();
@@ -19,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm">
-      {isSettingsSubPage ? (
+      {isSettingsPage || isSettingsSubPage ? (
         <Button onClick={handleBack} variant="ghost" size="icon">
           <ArrowLeft />
           <span className="sr-only">Back</span>
@@ -30,7 +31,7 @@ export default function Header() {
         </Link>
       )}
       
-      {showProfileSpecificHeader ? (
+      {isProfilePage ? (
         <div className="flex items-center gap-2">
             <Button asChild variant="ghost" size="icon">
                 <Link href="/settings">
@@ -39,8 +40,8 @@ export default function Header() {
                 </Link>
             </Button>
         </div>
-      ) : isSettingsSubPage ? (
-        // Hides all icons on sub-pages, title is in the page content
+      ) : isSettingsPage || isSettingsSubPage ? (
+        // Hides all icons on settings pages, title is in the page content
         <div></div>
       ) : (
         <div className="flex items-center gap-2">
