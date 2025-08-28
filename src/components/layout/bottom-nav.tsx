@@ -1,15 +1,16 @@
+
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, Store, User } from 'lucide-react';
+import { Home, Search, Gavel, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/', label: 'Feed', icon: Home },
+  { href: '/', label: 'Home', icon: Home },
   { href: '/discover', label: 'Discover', icon: Search },
-  { href: '/marketplace', label: 'Marketplace', icon: Store },
-  { href: '/network', label: 'Network', icon: User },
+  { href: '/marketplace', label: 'Bidding', icon: Gavel },
+  { href: '/network', label: 'Profile', icon: User },
 ];
 
 export default function BottomNav() {
