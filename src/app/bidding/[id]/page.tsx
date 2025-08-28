@@ -28,7 +28,7 @@ const product = {
   basePrice: '250',
   imageUrl: 'https://picsum.photos/seed/watch/500/500',
   imageHint: 'elegant watch',
-  endDate: new Date(Date.now() + 1000 * 50), // 50 seconds from now
+  endDate: new Date(Date.now() + 1000 * 10), // 10 seconds from now
 };
 
 const bidders = [
