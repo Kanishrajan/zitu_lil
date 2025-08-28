@@ -17,7 +17,8 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
         fontFamily="'Inter', sans-serif"
         fontSize="24"
         fontWeight="bold"
-        letterSpacing="2"
+        letterSpacing="0"
+        className="tracking-tighter"
       >
         ZITU
       </text>

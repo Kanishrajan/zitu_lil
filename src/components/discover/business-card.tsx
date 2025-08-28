@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 type Business = {
@@ -18,23 +18,21 @@ type BusinessCardProps = {
 
 export function BusinessCard({ business }: BusinessCardProps) {
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="p-0">
-        <div className="relative aspect-video w-full">
+    <Card className="overflow-hidden border-none shadow-none rounded-lg group">
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg">
           <Image
             src={business.imageUrl}
             width={600}
             height={400}
             alt={business.name}
-            className="object-cover"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={business.imageHint || "business storefront"}
           />
+           {business.isTrending && <Badge className="absolute top-3 right-3">Trending</Badge>}
         </div>
-      </CardHeader>
-      <CardContent className="p-4 space-y-2">
+      <CardContent className="p-0 pt-4 space-y-1">
         <div className="flex justify-between items-start">
-            <CardTitle className="text-lg font-semibold">{business.name}</CardTitle>
-            {business.isTrending && <Badge>Trending</Badge>}
+            <h3 className="text-lg font-semibold">{business.name}</h3>
         </div>
         <p className="text-sm text-muted-foreground">{business.category} &middot; {business.region}</p>
       </CardContent>

@@ -10,32 +10,33 @@ import { Skeleton } from '@/components/ui/skeleton';
 const posts = [
   {
     id: 1,
-    username: 'zitu_official',
+    username: 'minimal_living',
     avatarUrl: 'https://picsum.photos/id/10/100/100',
-    imageUrl: 'https://picsum.photos/id/1015/600/400',
-    caption: 'Welcome to ZITU! The new era of business networking and marketplace. 🚀',
-    likes: 1204,
-    comments: 89,
-    imageHint: 'neon sign welcome'
+    imageUrl: 'https://picsum.photos/seed/livingroom/600/800',
+    caption: 'Our new collection of minimalist furniture is here to bring peace to your space. ✨',
+    likes: 1345,
+    comments: 112,
+    imageHint: 'minimalist living room'
   },
   {
     id: 2,
-    username: 'creative_co',
+    username: 'urban_oasis',
     avatarUrl: 'https://picsum.photos/id/11/100/100',
-    imageUrl: 'https://picsum.photos/id/1025/600/800',
-    caption: 'Just launched our new collection. Check it out on the marketplace! #newlaunch #fashion',
-    likes: 543,
-    comments: 23,
-    imageHint: 'clothing rack'
+    imageUrl: 'https://picsum.photos/seed/plants/600/700',
+    caption: 'Bringing the outdoors in. Find the perfect plant for your home in our marketplace! 🌿',
+    likes: 2109,
+    comments: 245,
+    imageHint: 'house plants'
   },
   {
     id: 3,
-    username: 'tech_trends',
+    username: 'cozy_corners',
     avatarUrl: 'https://picsum.photos/id/12/100/100',
-    videoUrl: 'https://videos.pexels.com/video-files/3209828/3209828-sd_640_360_30fps.mp4',
-    caption: 'The future of UI is here. Fluid, intuitive, and beautiful. #uidesign #tech',
-    likes: 876,
-    comments: 55,
+    imageUrl: 'https://picsum.photos/seed/bedroom/600/750',
+    caption: 'Handcrafted beds and decor for your dream bedroom. #homedecor #interiordesign',
+    likes: 987,
+    comments: 76,
+    imageHint: 'cozy bedroom'
   },
 ];
 

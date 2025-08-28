@@ -4,29 +4,35 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 const businesses = [
-  { id: 1, name: 'Urban Eatery', category: 'Restaurant', region: 'Downtown', imageUrl: 'https://picsum.photos/seed/restaurant/600/400', isTrending: true, imageHint: 'modern restaurant' },
-  { id: 2, name: 'Vintage Threads', category: 'Fashion', region: 'Arts District', imageUrl: 'https://picsum.photos/seed/fashion/600/400', isTrending: false, imageHint: 'clothing boutique' },
-  { id: 3, name: 'Code & Coffee', category: 'Cafe', region: 'Tech Hub', imageUrl: 'https://picsum.photos/seed/cafe/600/400', isTrending: true, imageHint: 'coffee shop' },
-  { id: 4, name: 'Iron Gym', category: 'Fitness', region: 'Uptown', imageUrl: 'https://picsum.photos/seed/gym/600/400', isTrending: false, imageHint: 'modern gym' },
-  { id: 5, name: 'The Book Nook', category: 'Bookstore', region: 'Downtown', imageUrl: 'https://picsum.photos/seed/books/600/400', isTrending: false, imageHint: 'cozy bookstore' },
-  { id: 6, name: 'Pixel Perfect', category: 'Design Agency', region: 'Arts District', imageUrl: 'https://picsum.photos/seed/design/600/400', isTrending: true, imageHint: 'design agency' },
+  { id: 1, name: 'Scandi Living', category: 'Furniture', region: 'Copenhagen', imageUrl: 'https://picsum.photos/seed/scandi/600/400', isTrending: true, imageHint: 'scandinavian furniture' },
+  { id: 2, name: 'Boho Boutique', category: 'Decor', region: 'Byron Bay', imageUrl: 'https://picsum.photos/seed/boho/600/400', isTrending: false, imageHint: 'bohemian decor' },
+  { id: 3, name: 'Modern Kitchens', category: 'Kitchenware', region: 'Milan', imageUrl: 'https://picsum.photos/seed/kitchen/600/400', isTrending: true, imageHint: 'modern kitchen' },
+  { id: 4, name: 'The Green Shelf', category: 'Plants', region: 'Online', imageUrl: 'https://picsum.photos/seed/plantdecor/600/400', isTrending: false, imageHint: 'indoor plants' },
+  { id: 5, name: 'Artisan Textiles', category: 'Rugs & Throws', region: 'Marrakesh', imageUrl: 'https://picsum.photos/seed/textiles/600/400', isTrending: false, imageHint: 'artisan textiles' },
+  { id: 6, name: 'Industrial Light Co.', category: 'Lighting', region: 'Brooklyn', imageUrl: 'https://picsum.photos/seed/lighting/600/400', isTrending: true, imageHint: 'industrial lighting' },
 ];
 
 export default function DiscoverPage() {
   return (
     <div className="container mx-auto px-4 py-4">
-      <div className="space-y-6">
-        <h1 className="text-3xl font-bold tracking-tight">Discover</h1>
+      <div className="space-y-8">
+        <div className='space-y-2'>
+            <h1 className="text-4xl font-bold tracking-tighter">Discover</h1>
+            <p className="text-muted-foreground">Find businesses that match your style.</p>
+        </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-          <Input placeholder="Search businesses..." className="w-full pl-10 h-12" />
+          <Input placeholder="Search furniture, decor, brands..." className="w-full pl-10 h-12 rounded-full bg-secondary border-transparent focus:bg-background focus:border-border" />
         </div>
         <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4">
-          <Button variant="secondary">Category</Button>
-          <Button variant="secondary">Region</Button>
-          <Button variant="secondary">Trending</Button>
+          <Button variant="secondary" className="rounded-full">Furniture</Button>
+          <Button variant="secondary" className="rounded-full">Decor</Button>
+          <Button variant="secondary" className="rounded-full">Lighting</Button>
+          <Button variant="secondary" className="rounded-full">Kitchenware</Button>
+          <Button variant="secondary" className="rounded-full">Textiles</Button>
+          <Button variant="primary" className="rounded-full">Trending</Button>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {businesses.map((biz) => (
             <BusinessCard key={biz.id} business={biz} />
           ))}
