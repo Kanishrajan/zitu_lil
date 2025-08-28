@@ -3,41 +3,19 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { PostCard } from '@/components/feed/post-card';
+import { ProductCard } from '@/components/marketplace/product-card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 
-const posts = [
-  {
-    id: 1,
-    username: 'JewelryGems',
-    avatarUrl: 'https://picsum.photos/seed/jewelry/100/100',
-    imageUrl: 'https://picsum.photos/seed/necklace_feed/600/800',
-    caption: 'Adorn yourself with elegance. Our new collection of silver necklaces is here.',
-    likes: 1345,
-    comments: 112,
-    imageHint: 'silver necklace'
-  },
-  {
-    id: 2,
-    username: 'Ray-Ban',
-    avatarUrl: 'https://picsum.photos/seed/rayban/100/100',
-    imageUrl: 'https://picsum.photos/seed/sunglasses_feed/600/700',
-    caption: 'You can\'t go wrong with a classic. The iconic Aviator, available now. #sunglasses',
-    likes: 2109,
-    comments: 245,
-    imageHint: 'classic sunglasses'
-  },
-  {
-    id: 3,
-    username: 'FashionFinds',
-    avatarUrl: 'https://picsum.photos/seed/fashion/100/100',
-    imageUrl: 'https://picsum.photos/seed/scarf_feed/600/750',
-    caption: 'Wrap yourself in luxury. Our new silk scarves are perfect for any occasion.',
-    likes: 987,
-    comments: 76,
-    imageHint: 'silk scarf'
-  },
+const products = [
+  { id: 1, name: 'Silver-Plated Necklace', price: '150', imageUrl: 'https://picsum.photos/seed/necklace/500/500', imageHint: 'silver necklace' },
+  { id: 2, name: 'Silk Scarf', price: '80', imageUrl: 'https://picsum.photos/seed/scarf/500/500', imageHint: 'silk scarf' },
+  { id: 3, name: 'Gold-Plated Earrings', price: '120', imageUrl: 'https://picsum.photos/seed/earrings/500/500', imageHint: 'gold earrings' },
+  { id: 4, name: 'Leather Wallet', price: 'Offer', imageUrl: 'https://picsum.photos/seed/wallet/500/500', imageHint: 'leather wallet' },
+  { id: 5, name: 'Designer Sunglasses', price: '180', imageUrl: 'https://picsum.photos/seed/sunglasses/500/500', imageHint: 'stylish sunglasses' },
+  { id: 6, name: 'Beaded Bracelet', price: '45', imageUrl: 'https://picsum.photos/seed/bracelet/500/500', imageHint: 'beaded bracelet' },
+  { id: 7, name: 'Luxury Watch', price: '450', imageUrl: 'https://picsum.photos/seed/watch_feed/500/500', imageHint: 'luxury watch' },
+  { id: 8, name: 'Classic Handbag', price: '220', imageUrl: 'https://picsum.photos/seed/handbag/500/500', imageHint: 'classic handbag' },
 ];
 
 export default function Home() {
@@ -61,21 +39,33 @@ export default function Home() {
 
   if (isLoading || !isAuthenticated) {
     return (
-        <div className="container mx-auto max-w-2xl px-0 sm:px-4 py-4">
-            <div className="space-y-6">
-                <Skeleton className="h-[700px] w-full" />
-                <Skeleton className="h-[700px] w-full" />
-            </div>
+        <div className="container mx-auto px-4 py-4">
+             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-64 w-full" />
+             </div>
         </div>
     );
   }
 
   return (
-    <div className="container mx-auto max-w-2xl px-0 sm:px-4 py-4">
+    <div className="container mx-auto px-4 py-4">
       <div className="space-y-6">
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
+        <div className="flex items-center justify-between">
+          <div className='space-y-1'>
+            <h1 className="text-3xl font-bold tracking-tight">For You</h1>
+            <p className="text-muted-foreground">Products we think you'll love.</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );
