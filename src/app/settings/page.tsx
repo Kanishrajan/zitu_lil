@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { toast } from '@/hooks/use-toast';
 
 type SettingsItemProps = {
   icon: React.ElementType;
@@ -56,6 +58,17 @@ function SectionTitle({ title }: SectionTitleProps) {
 
 
 export default function SettingsPage() {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        // For prototyping, we'll use sessionStorage to track auth state.
+        sessionStorage.removeItem('isAuthenticated');
+        toast({
+            title: 'Logged out successfully!',
+        });
+        router.push('/login');
+    };
+
   return (
     <div className="container mx-auto max-w-2xl py-4 mb-24">
       <div className="space-y-4">
@@ -100,7 +113,7 @@ export default function SettingsPage() {
         <Separator />
 
         <div className="p-4">
-             <Button variant="destructive" className="w-full">
+             <Button variant="destructive" className="w-full" onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout
             </Button>
