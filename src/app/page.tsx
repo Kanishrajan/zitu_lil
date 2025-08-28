@@ -10,33 +10,33 @@ import { Skeleton } from '@/components/ui/skeleton';
 const posts = [
   {
     id: 1,
-    username: 'IKEA',
-    avatarUrl: 'https://picsum.photos/seed/ikea/100/100',
-    imageUrl: 'https://picsum.photos/seed/livingroom/600/800',
-    caption: 'Our new collection of minimalist furniture is here to bring peace to your space. ✨',
+    username: 'Fossil',
+    avatarUrl: 'https://picsum.photos/seed/fossil/100/100',
+    imageUrl: 'https://picsum.photos/seed/watch_feed/600/800',
+    caption: 'Timeless style meets modern innovation. Discover our new collection of smartwatches.',
     likes: 1345,
     comments: 112,
-    imageHint: 'minimalist living room'
+    imageHint: 'elegant watch'
   },
   {
     id: 2,
-    username: 'UrbanLadder',
-    avatarUrl: 'https://picsum.photos/seed/urban/100/100',
-    imageUrl: 'https://picsum.photos/seed/plants/600/700',
-    caption: 'Bringing the outdoors in. Find the perfect plant for your home in our marketplace! 🌿',
+    username: 'Ray-Ban',
+    avatarUrl: 'https://picsum.photos/seed/rayban/100/100',
+    imageUrl: 'https://picsum.photos/seed/sunglasses_feed/600/700',
+    caption: 'You can\'t go wrong with a classic. The iconic Aviator, available now. #sunglasses',
     likes: 2109,
     comments: 245,
-    imageHint: 'house plants'
+    imageHint: 'classic sunglasses'
   },
   {
     id: 3,
-    username: 'Pepperfry',
-    avatarUrl: 'https://picsum.photos/seed/pepperfry/100/100',
-    imageUrl: 'https://picsum.photos/seed/bedroom/600/750',
-    caption: 'Handcrafted beds and decor for your dream bedroom. #homedecor #interiordesign',
+    username: 'Gucci',
+    avatarUrl: 'https://picsum.photos/seed/gucci/100/100',
+    imageUrl: 'https://picsum.photos/seed/handbag/600/750',
+    caption: 'Elegance in every detail. The new Marmont handbag collection has arrived.',
     likes: 987,
     comments: 76,
-    imageHint: 'cozy bedroom'
+    imageHint: 'designer handbag'
   },
 ];
 
