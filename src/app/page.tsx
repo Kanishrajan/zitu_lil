@@ -46,15 +46,10 @@ export default function Home() {
 
   useEffect(() => {
     // In a real app, you'd check a token, session, or make an API call.
-    // We'll simulate this with a timeout.
-    const timer = setTimeout(() => {
-        // For now, we'll assume the user is not authenticated.
-        const authStatus = false; 
-        setIsAuthenticated(authStatus);
-        setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    // We'll simulate this by checking sessionStorage.
+    const authStatus = sessionStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {

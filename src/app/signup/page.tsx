@@ -58,6 +58,9 @@ export default function SignUpPage() {
     await new Promise(resolve => setTimeout(resolve, 2000));
     console.log(values);
 
+    // For prototyping, we'll use sessionStorage to track auth state.
+    sessionStorage.setItem('isAuthenticated', 'true');
+
     toast({
       title: 'Account created!',
       description: "We've created your account for you.",
@@ -130,7 +133,7 @@ export default function SignUpPage() {
             />
             <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isSubmitting ? 'Creating Account...' : 'Create Account'}
+              {isSubmitting ? 'Creating Account...' : 'Sign Up'}
             </Button>
           </form>
         </Form>

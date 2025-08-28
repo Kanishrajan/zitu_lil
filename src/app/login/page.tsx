@@ -1,4 +1,3 @@
-
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -48,6 +47,9 @@ export default function LoginPage() {
     // Simulate login
     await new Promise(resolve => setTimeout(resolve, 2000));
     console.log(values);
+
+    // For prototyping, we'll use sessionStorage to track auth state.
+    sessionStorage.setItem('isAuthenticated', 'true');
 
     toast({
       title: 'Logged in successfully!',
