@@ -24,18 +24,18 @@ import { useCountdown } from '@/hooks/use-countdown';
 // Mock data, in a real app you would fetch this based on the [id]
 const product = {
   id: 1,
-  name: 'Minimalist Watch',
-  basePrice: '250',
-  imageUrl: 'https://picsum.photos/seed/watch/500/500',
-  imageHint: 'elegant watch',
+  name: 'Silver-Plated Necklace',
+  basePrice: '150',
+  imageUrl: 'https://picsum.photos/seed/necklace/500/500',
+  imageHint: 'silver necklace',
   endDate: new Date(Date.now() + 1000 * 10), // 10 seconds from now
 };
 
 const bidders = [
-  { id: 2, name: 'ZITU User', avatarUrl: 'https://picsum.photos/id/237/100/100', bidAmount: 280, isCurrentUser: true, timestamp: new Date(Date.now() - 1000 * 60 * 3) },
-  { id: 1, name: 'DesignMaven', avatarUrl: 'https://picsum.photos/id/1011/100/100', bidAmount: 275, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 2) },
-  { id: 3, name: 'Artisan Finds', avatarUrl: 'https://picsum.photos/id/1025/100/100', bidAmount: 260, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 4) },
-  { id: 4, name: 'StyleHunter', avatarUrl: 'https://picsum.photos/id/1040/100/100', bidAmount: 255, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 5) },
+  { id: 2, name: 'ZITU User', avatarUrl: 'https://picsum.photos/id/237/100/100', bidAmount: 180, isCurrentUser: true, timestamp: new Date(Date.now() - 1000 * 60 * 3) },
+  { id: 1, name: 'JewelryGems', avatarUrl: 'https://picsum.photos/id/1011/100/100', bidAmount: 175, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 2) },
+  { id: 3, name: 'FashionFinds', avatarUrl: 'https://picsum.photos/id/1025/100/100', bidAmount: 160, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 4) },
+  { id: 4, name: 'StyleHunter', avatarUrl: 'https://picsum.photos/id/1040/100/100', bidAmount: 155, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 5) },
 ];
 
 export default function BiddingArenaPage({ params }: { params: { id: string } }) {

@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 
 const products = [
-  { id: 1, name: 'Minimalist Watch', price: '250', imageUrl: 'https://picsum.photos/seed/watch/500/500', imageHint: 'elegant watch' },
-  { id: 2, name: 'Leather Backpack', price: '120', imageUrl: 'https://picsum.photos/seed/backpack/500/500', imageHint: 'leather backpack' },
-  { id: 3, name: 'Wireless Earbuds', price: '99', imageUrl: 'https://picsum.photos/seed/earbuds/500/500', imageHint: 'wireless earbuds' },
-  { id: 4, name: 'Handmade Ceramic Mug', price: 'Offer', imageUrl: 'https://picsum.photos/seed/mug/500/500', imageHint: 'ceramic mug' },
+  { id: 1, name: 'Silver-Plated Necklace', price: '150', imageUrl: 'https://picsum.photos/seed/necklace/500/500', imageHint: 'silver necklace' },
+  { id: 2, name: 'Silk Scarf', price: '80', imageUrl: 'https://picsum.photos/seed/scarf/500/500', imageHint: 'silk scarf' },
+  { id: 3, name: 'Gold-Plated Earrings', price: '120', imageUrl: 'https://picsum.photos/seed/earrings/500/500', imageHint: 'gold earrings' },
+  { id: 4, name: 'Leather Wallet', price: 'Offer', imageUrl: 'https://picsum.photos/seed/wallet/500/500', imageHint: 'leather wallet' },
   { id: 5, name: 'Designer Sunglasses', price: '180', imageUrl: 'https://picsum.photos/seed/sunglasses/500/500', imageHint: 'stylish sunglasses' },
-  { id: 6, name: 'Artisanal Coffee Beans', price: '25', imageUrl: 'https://picsum.photos/seed/coffeebeans/500/500', imageHint: 'coffee beans' },
+  { id: 6, name: 'Beaded Bracelet', price: '45', imageUrl: 'https://picsum.photos/seed/bracelet/500/500', imageHint: 'beaded bracelet' },
 ];
 
 export default function MarketplacePage() {

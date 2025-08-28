@@ -10,13 +10,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 const posts = [
   {
     id: 1,
-    username: 'Fossil',
-    avatarUrl: 'https://picsum.photos/seed/fossil/100/100',
-    imageUrl: 'https://picsum.photos/seed/watch_feed/600/800',
-    caption: 'Timeless style meets modern innovation. Discover our new collection of smartwatches.',
+    username: 'JewelryGems',
+    avatarUrl: 'https://picsum.photos/seed/jewelry/100/100',
+    imageUrl: 'https://picsum.photos/seed/necklace_feed/600/800',
+    caption: 'Adorn yourself with elegance. Our new collection of silver necklaces is here.',
     likes: 1345,
     comments: 112,
-    imageHint: 'elegant watch'
+    imageHint: 'silver necklace'
   },
   {
     id: 2,
@@ -30,13 +30,13 @@ const posts = [
   },
   {
     id: 3,
-    username: 'Gucci',
-    avatarUrl: 'https://picsum.photos/seed/gucci/100/100',
-    imageUrl: 'https://picsum.photos/seed/handbag/600/750',
-    caption: 'Elegance in every detail. The new Marmont handbag collection has arrived.',
+    username: 'FashionFinds',
+    avatarUrl: 'https://picsum.photos/seed/fashion/100/100',
+    imageUrl: 'https://picsum.photos/seed/scarf_feed/600/750',
+    caption: 'Wrap yourself in luxury. Our new silk scarves are perfect for any occasion.',
     likes: 987,
     comments: 76,
-    imageHint: 'designer handbag'
+    imageHint: 'silk scarf'
   },
 ];
 

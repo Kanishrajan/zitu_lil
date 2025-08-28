@@ -14,23 +14,23 @@ import { ProductCard } from '@/components/marketplace/product-card';
 // Mock data, in a real app you would fetch this based on the [id]
 const userProfile = {
   id: 1,
-  name: 'Eco Furnish',
-  type: 'Furniture Company',
-  location: 'India',
-  avatarUrl: 'https://picsum.photos/id/101/200',
-  bio: 'Sustainable and stylish furniture for the modern home. We believe in quality craftsmanship and eco-friendly materials.',
-  points: 12550,
-  productsSold: 120,
+  name: 'JewelryGems',
+  type: 'Accessories Company',
+  location: 'USA',
+  avatarUrl: 'https://picsum.photos/id/1011/200',
+  bio: 'Exquisite and timeless jewelry for every occasion. We specialize in custom designs and high-quality materials.',
+  points: 11800,
+  productsSold: 110,
   ranking: {
-    world: 1,
+    world: 2,
     region: 1,
     local: 1,
   },
   products: [
-    { id: 1, name: 'Minimalist Watch', price: '250', imageUrl: 'https://picsum.photos/seed/watch/500/500', imageHint: 'elegant watch' },
-    { id: 2, name: 'Leather Backpack', price: '120', imageUrl: 'https://picsum.photos/seed/backpack/500/500', imageHint: 'leather backpack' },
-    { id: 3, name: 'Wireless Earbuds', price: '99', imageUrl: 'https://picsum.photos/seed/earbuds/500/500', imageHint: 'wireless earbuds' },
-    { id: 4, name: 'Handmade Ceramic Mug', price: 'Offer', imageUrl: 'https://picsum.photos/seed/mug/500/500', imageHint: 'ceramic mug' },
+    { id: 1, name: 'Silver-Plated Necklace', price: '150', imageUrl: 'https://picsum.photos/seed/necklace/500/500', imageHint: 'silver necklace' },
+    { id: 2, name: 'Gold-Plated Earrings', price: '120', imageUrl: 'https://picsum.photos/seed/earrings/500/500', imageHint: 'gold earrings' },
+    { id: 3, name: 'Beaded Bracelet', price: '45', imageUrl: 'https://picsum.photos/seed/bracelet/500/500', imageHint: 'beaded bracelet' },
+    { id: 4, name: 'Diamond Ring', price: 'Offer', imageUrl: 'https://picsum.photos/seed/ring/500/500', imageHint: 'diamond ring' },
   ]
 };
 
