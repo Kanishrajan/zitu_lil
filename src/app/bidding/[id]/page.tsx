@@ -15,7 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { BiddingLeaderboard } from '@/components/bidding/leaderboard';
-import { Timer, ArrowLeft, Loader2 } from 'lucide-react';
+import { Timer, ArrowLeft, Loader2, PartyPopper } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
@@ -32,8 +32,8 @@ const product = {
 };
 
 const bidders = [
-  { id: 1, name: 'DesignMaven', avatarUrl: 'https://picsum.photos/id/1011/100/100', bidAmount: 280, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 2) },
-  { id: 2, name: 'ZITU User', avatarUrl: 'https://picsum.photos/id/237/100/100', bidAmount: 275, isCurrentUser: true, timestamp: new Date(Date.now() - 1000 * 60 * 3) },
+  { id: 2, name: 'ZITU User', avatarUrl: 'https://picsum.photos/id/237/100/100', bidAmount: 280, isCurrentUser: true, timestamp: new Date(Date.now() - 1000 * 60 * 3) },
+  { id: 1, name: 'DesignMaven', avatarUrl: 'https://picsum.photos/id/1011/100/100', bidAmount: 275, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 2) },
   { id: 3, name: 'Artisan Finds', avatarUrl: 'https://picsum.photos/id/1025/100/100', bidAmount: 260, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 4) },
   { id: 4, name: 'StyleHunter', avatarUrl: 'https://picsum.photos/id/1040/100/100', bidAmount: 255, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 5) },
 ];
@@ -45,6 +45,10 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { timeLeft, isEnded } = useCountdown(product.endDate);
   const { toast } = useToast();
+
+  const sortedBidders = [...bidders].sort((a, b) => b.bidAmount - a.bidAmount);
+  const winner = sortedBidders[0];
+  const isWinner = winner?.isCurrentUser;
 
 
   const handleBidSubmit = async () => {
@@ -126,11 +130,24 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
           </main>
           
           <footer className="sticky bottom-4">
+            {isEnded ? (
+                isWinner ? (
+                    <Button onClick={() => router.push(`/payment/${product.id}`)} className="w-full h-14 text-lg font-bold bg-amber-500 hover:bg-amber-600">
+                        <PartyPopper className="mr-2" />
+                        Proceed to Payment
+                    </Button>
+                ) : (
+                    <Button className="w-full h-14 text-lg font-bold" disabled>
+                        Auction Ended
+                    </Button>
+                )
+            ) : (
               <DialogTrigger asChild>
-                <Button className="w-full h-14 text-lg font-bold" disabled={isEnded}>
-                    {isEnded ? 'Auction Ended' : 'Place New Bid'}
+                <Button className="w-full h-14 text-lg font-bold">
+                    Place New Bid
                 </Button>
               </DialogTrigger>
+            )}
           </footer>
         </div>
       </div>
