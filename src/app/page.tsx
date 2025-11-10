@@ -8,14 +8,14 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 
 const products = [
-  { id: 1, name: 'Silver-Plated Necklace', price: '150', imageUrl: 'https://picsum.photos/seed/necklace/500/500', imageHint: 'silver necklace' },
-  { id: 2, name: 'Silk Scarf', price: '80', imageUrl: 'https://picsum.photos/seed/scarf/500/500', imageHint: 'silk scarf' },
-  { id: 3, name: 'Gold-Plated Earrings', price: '120', imageUrl: 'https://picsum.photos/seed/earrings/500/500', imageHint: 'gold earrings' },
-  { id: 4, name: 'Leather Wallet', price: 'Offer', imageUrl: 'https://picsum.photos/seed/wallet/500/500', imageHint: 'leather wallet' },
-  { id: 5, name: 'Designer Sunglasses', price: '180', imageUrl: 'https://picsum.photos/seed/sunglasses/500/500', imageHint: 'stylish sunglasses' },
-  { id: 6, name: 'Beaded Bracelet', price: '45', imageUrl: 'https://picsum.photos/seed/bracelet/500/500', imageHint: 'beaded bracelet' },
-  { id: 7, name: 'Luxury Watch', price: '450', imageUrl: 'https://picsum.photos/seed/watch_feed/500/500', imageHint: 'luxury watch' },
-  { id: 8, name: 'Classic Handbag', price: '220', imageUrl: 'https://picsum.photos/seed/handbag/500/500', imageHint: 'classic handbag' },
+  { id: 1, name: 'Basmati Rice (1 Ton)', price: '950', imageUrl: 'https://picsum.photos/seed/rice/500/500', imageHint: 'sack of rice' },
+  { id: 2, name: 'Whole Wheat (1 Ton)', price: '450', imageUrl: 'https://picsum.photos/seed/wheat/500/500', imageHint: 'field of wheat' },
+  { id: 3, name: 'Refined Sugar (1 Ton)', price: '800', imageUrl: 'https://picsum.photos/seed/sugar/500/500', imageHint: 'pile of sugar' },
+  { id: 4, name: 'Yellow Lentils (1 Ton)', price: 'Offer', imageUrl: 'https://picsum.photos/seed/lentils/500/500', imageHint: 'bag of lentils' },
+  { id: 5, name: 'Industrial Salt (1 Ton)', price: '300', imageUrl: 'https://picsum.photos/seed/salt/500/500', imageHint: 'pile of salt' },
+  { id: 6, name: 'Corn Grits (1 Ton)', price: '400', imageUrl: 'https://picsum.photos/seed/corn/500/500', imageHint: 'corn grits' },
+  { id: 7, name: 'Soyabean Meal (1 Ton)', price: '550', imageUrl: 'https://picsum.photos/seed/soybean/500/500', imageHint: 'soybean meal' },
+  { id: 8, name: 'Organic Honey (500L)', price: '2200', imageUrl: 'https://picsum.photos/seed/honey/500/500', imageHint: 'jar of honey' },
 ];
 
 export default function Home() {
@@ -23,12 +23,14 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
+    // In a real app, this would be a proper auth check
     const authStatus = sessionStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
     if (!authStatus) {
       router.push('/login');
     }
   }, [router]);
+
 
   if (isAuthenticated === null) {
     return (
@@ -52,7 +54,7 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className='space-y-1'>
               <h1 className="text-3xl font-bold tracking-tight">For You</h1>
-              <p className="text-muted-foreground">Products we think you'll love.</p>
+              <p className="text-muted-foreground">Wholesale products we think you'll love.</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
