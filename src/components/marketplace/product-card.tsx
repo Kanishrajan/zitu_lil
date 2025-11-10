@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { ShoppingCart } from 'lucide-react';
 
 type Product = {
   id: number;
@@ -20,7 +21,7 @@ type ProductCardProps = {
 
 export function ProductCard({ product }: ProductCardProps) {
   const isOffer = product.price === 'Offer';
-  const buttonContent = isOffer ? 'Negotiate' : 'Place Bid';
+  const buttonContent = isOffer ? 'Negotiate' : 'Add to Cart';
 
   return (
       <Card className="overflow-hidden border-none bg-transparent shadow-none">
@@ -43,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </p>
           </div>
           <Button asChild variant={isOffer ? 'secondary' : 'default'} className="w-full h-9 text-sm">
-            <Link href={`/bidding/${product.id}`}>
+            <Link href={isOffer ? `/messages/${product.id}` : '#'}>
               {buttonContent}
             </Link>
           </Button>
@@ -51,4 +52,3 @@ export function ProductCard({ product }: ProductCardProps) {
       </Card>
   );
 }
-

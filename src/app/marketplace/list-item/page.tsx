@@ -18,7 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { ImageUp, Loader2, Sparkles } from 'lucide-react';
+import { ImageUp, Loader2, Sparkles, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { suggestProductInfo } from '@/ai/flows/suggest-product-info-flow';
@@ -32,6 +32,9 @@ const formSchema = z.object({
   }),
   price: z.string().refine((val) => !isNaN(parseFloat(val)) || val.toLowerCase() === 'offer', {
     message: "Price must be a number or 'offer'.",
+  }),
+  location: z.string().min(2, {
+    message: 'Location must be at least 2 characters.',
   }),
   image: z.any().refine((file) => file instanceof File, 'Image is required.'),
 });
@@ -57,6 +60,7 @@ export default function ListItemPage() {
       name: '',
       description: '',
       price: '',
+      location: '',
     },
   });
 
@@ -137,7 +141,7 @@ export default function ListItemPage() {
                 <FormItem>
                   <FormLabel>Product Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g. Minimalist Watch" {...field} />
+                    <Input placeholder="e.g. Basmati Rice (1 Ton)" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -173,7 +177,7 @@ export default function ListItemPage() {
                 />
             <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Description (Caption)</FormLabel>
                     <Button
                         type="button"
                         variant="ghost"
@@ -214,11 +218,27 @@ export default function ListItemPage() {
                 <FormItem>
                   <FormLabel>Price ($) or "Offer"</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g. 250 or Offer" {...field} />
+                    <Input placeholder="e.g. 950 or Offer" {...field} />
                   </FormControl>
                   <FormDescription>
                     Enter a price in USD or type 'Offer' to accept negotiations.
                   </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Location</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                        <Input placeholder="e.g. Mumbai, India" {...field} className="pl-10" />
+                    </div>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
