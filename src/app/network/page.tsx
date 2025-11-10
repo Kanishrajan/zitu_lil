@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from 'next/image';
 import { Grid3x3, Bookmark } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
