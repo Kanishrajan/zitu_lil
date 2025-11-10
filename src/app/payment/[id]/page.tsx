@@ -22,7 +22,7 @@ import {
 const product = {
   id: 1,
   name: 'Minimalist Watch',
-  finalBid: 280,
+  finalBid: 22000,
   imageUrl: 'https://picsum.photos/seed/watch/500/500',
   imageHint: 'elegant watch',
 };
@@ -83,7 +83,7 @@ export default function PaymentPage({ params }: { params: { id: string } }) {
                     </div>
                     <div className='text-center'>
                         <p className="text-muted-foreground">Final Price</p>
-                        <p className="text-4xl font-bold tracking-tighter">${product.finalBid}</p>
+                        <p className="text-4xl font-bold tracking-tighter">₹{product.finalBid.toLocaleString('en-IN')}</p>
                     </div>
                     
                     <Separator />
@@ -128,7 +128,7 @@ export default function PaymentPage({ params }: { params: { id: string } }) {
 
         <footer className="sticky bottom-4">
             <Button onClick={handlePayment} disabled={isProcessing} className="w-full h-14 text-lg font-bold">
-                {isProcessing ? <Loader2 className="animate-spin" /> : `Pay $${product.finalBid} Securely`}
+                {isProcessing ? <Loader2 className="animate-spin" /> : `Pay ₹${product.finalBid.toLocaleString('en-IN')} Securely`}
                 {!isProcessing && <Lock className="ml-2 h-5 w-5" />}
             </Button>
         </footer>

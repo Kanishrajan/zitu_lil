@@ -41,7 +41,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="pt-1">
             <h3 className="text-sm font-medium">{product.name}</h3>
             <p className="text-xs text-muted-foreground">
-              {isOffer ? 'Accepting Offers' : `Starting at $${product.price}`}
+              {isOffer ? 'Accepting Offers' : `Starting at ₹${product.price}`}
             </p>
           </div>
           <Button asChild variant={'outline'} className="w-full h-9 text-sm">
@@ -74,7 +74,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="pt-1">
             <h3 className="text-sm font-medium">{product.name}</h3>
             <p className="text-xs text-muted-foreground">
-              {isOffer ? 'Accepting Offers' : `Starts at $${product.price}`}
+              {isOffer ? 'Accepting Offers' : `Starts at ₹${product.price}`}
             </p>
           </div>
           <Button asChild variant={isOffer ? 'secondary' : 'default'} className="w-full h-9 text-sm">

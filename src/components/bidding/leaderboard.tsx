@@ -64,7 +64,7 @@ export function BiddingLeaderboard({ bidders, isEnded = false }: BiddingLeaderbo
                                 <p className="text-sm text-muted-foreground">{formatTimeAgo(bidder.timestamp)}</p>
                             </div>
                             <div className="text-right">
-                                <p className={cn("font-bold text-lg", isEnded && bidder.id === topBidder.id ? "text-amber-500" : "text-primary")}>${bidder.bidAmount}</p>
+                                <p className={cn("font-bold text-lg", isEnded && bidder.id === topBidder.id ? "text-amber-500" : "text-primary")}>₹{bidder.bidAmount.toLocaleString('en-IN')}</p>
                                 {bidder.id === topBidder.id && (
                                     <div className={cn(
                                         "flex items-center justify-end gap-1 text-xs",

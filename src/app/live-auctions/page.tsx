@@ -2,10 +2,10 @@
 import { ProductCard } from '@/components/marketplace/product-card';
 
 const auctionProducts = [
-  { id: 1, name: 'Silver-Plated Necklace', price: '150', imageUrl: 'https://picsum.photos/seed/necklace/500/500', imageHint: 'silver necklace', isAuction: true },
-  { id: 2, name: 'Gold-Plated Earrings', price: '120', imageUrl: 'https://picsum.photos/seed/earrings/500/500', imageHint: 'gold earrings', isAuction: true },
+  { id: 1, name: 'Silver-Plated Necklace', price: '12000', imageUrl: 'https://picsum.photos/seed/necklace/500/500', imageHint: 'silver necklace', isAuction: true },
+  { id: 2, name: 'Gold-Plated Earrings', price: '9000', imageUrl: 'https://picsum.photos/seed/earrings/500/500', imageHint: 'gold earrings', isAuction: true },
   { id: 3, name: 'Diamond Ring', price: 'Offer', imageUrl: 'https://picsum.photos/seed/ring/500/500', imageHint: 'diamond ring', isAuction: true },
-  { id: 7, name: 'Minimalist Watch', price: '250', imageUrl: 'https://picsum.photos/seed/watch/500/500', imageHint: 'elegant watch', isAuction: true },
+  { id: 7, name: 'Minimalist Watch', price: '20000', imageUrl: 'https://picsum.photos/seed/watch/500/500', imageHint: 'elegant watch', isAuction: true },
 ];
 
 export default function LiveAuctionsPage() {

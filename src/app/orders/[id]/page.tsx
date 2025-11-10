@@ -14,7 +14,7 @@ const order = {
   id: 1,
   product: {
     name: 'Minimalist Watch',
-    finalBid: 280,
+    finalBid: 22000,
     imageUrl: 'https://picsum.photos/seed/watch/500/500',
     imageHint: 'elegant watch',
   },
@@ -72,7 +72,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
                     </div>
                     <div>
                         <p className="font-semibold">{order.product.name}</p>
-                        <p className="text-muted-foreground">Final Price: ${order.product.finalBid}</p>
+                        <p className="text-muted-foreground">Final Price: ₹{order.product.finalBid}</p>
                     </div>
                 </div>
             </CardContent>

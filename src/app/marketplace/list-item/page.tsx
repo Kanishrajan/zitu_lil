@@ -216,12 +216,12 @@ export default function ListItemPage() {
               name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price ($) or "Offer"</FormLabel>
+                  <FormLabel>Price (₹) or "Offer"</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g. 950 or Offer" {...field} />
+                    <Input placeholder="e.g. 75000 or Offer" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Enter a price in USD or type 'Offer' to accept negotiations.
+                    Enter a price in INR or type 'Offer' to accept negotiations.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

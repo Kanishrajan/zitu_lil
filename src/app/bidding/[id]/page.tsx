@@ -25,17 +25,17 @@ import { useCountdown } from '@/hooks/use-countdown';
 const product = {
   id: 1,
   name: 'Silver-Plated Necklace',
-  basePrice: '150',
+  basePrice: '12000',
   imageUrl: 'https://picsum.photos/seed/necklace/500/500',
   imageHint: 'silver necklace',
   endDate: new Date(Date.now() + 1000 * 10), // 10 seconds from now
 };
 
 const bidders = [
-  { id: 2, name: 'ZITU User', avatarUrl: 'https://picsum.photos/id/237/100/100', bidAmount: 180, isCurrentUser: true, timestamp: new Date(Date.now() - 1000 * 60 * 3) },
-  { id: 1, name: 'JewelryGems', avatarUrl: 'https://picsum.photos/id/1011/100/100', bidAmount: 175, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 2) },
-  { id: 3, name: 'FashionFinds', avatarUrl: 'https://picsum.photos/id/1025/100/100', bidAmount: 160, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 4) },
-  { id: 4, name: 'StyleHunter', avatarUrl: 'https://picsum.photos/id/1040/100/100', bidAmount: 155, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 5) },
+  { id: 2, name: 'ZITU User', avatarUrl: 'https://picsum.photos/id/237/100/100', bidAmount: 14000, isCurrentUser: true, timestamp: new Date(Date.now() - 1000 * 60 * 3) },
+  { id: 1, name: 'JewelryGems', avatarUrl: 'https://picsum.photos/id/1011/100/100', bidAmount: 13500, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 2) },
+  { id: 3, name: 'FashionFinds', avatarUrl: 'https://picsum.photos/id/1025/100/100', bidAmount: 13000, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 4) },
+  { id: 4, name: 'StyleHunter', avatarUrl: 'https://picsum.photos/id/1040/100/100', bidAmount: 12500, isCurrentUser: false, timestamp: new Date(Date.now() - 1000 * 60 * 5) },
 ];
 
 export default function BiddingArenaPage({ params }: { params: { id: string } }) {
@@ -78,7 +78,7 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
     setIsOpen(false);
     toast({
         title: 'Bid Placed Successfully!',
-        description: `Your bid of $${bidAmount} for ${product.name} has been submitted.`,
+        description: `Your bid of ₹${bidAmount} for ${product.name} has been submitted.`,
     });
     setBidAmount('');
   };
@@ -110,7 +110,7 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
                   </div>
                   <div className="space-y-1">
                       <h2 className="text-2xl font-bold">{product.name}</h2>
-                      <p className="text-muted-foreground">Base Price: ${product.basePrice}</p>
+                      <p className="text-muted-foreground">Base Price: ₹{product.basePrice}</p>
                   </div>
               </div>
 
@@ -155,7 +155,7 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
         <DialogHeader>
           <DialogTitle>Place a Bid</DialogTitle>
           <DialogDescription>
-            You are placing a bid for <span className="font-semibold">{product.name}</span>. The starting price is ${product.basePrice}.
+            You are placing a bid for <span className="font-semibold">{product.name}</span>. The starting price is ₹{product.basePrice}.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -164,7 +164,7 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
               Bid
             </Label>
             <div className="relative col-span-3">
-                 <span className="absolute inset-y-0 left-3 flex items-center text-muted-foreground">$</span>
+                 <span className="absolute inset-y-0 left-3 flex items-center text-muted-foreground">₹</span>
                  <Input
                     id="bid-amount"
                     type="number"
@@ -178,7 +178,7 @@ export default function BiddingArenaPage({ params }: { params: { id: string } })
         </div>
         <DialogFooter>
           <Button type="submit" onClick={handleBidSubmit} disabled={isSubmitting} className="w-full">
-            {isSubmitting ? <Loader2 className="animate-spin" /> : `Confirm Bid of $${bidAmount || '0'}`}
+            {isSubmitting ? <Loader2 className="animate-spin" /> : `Confirm Bid of ₹${bidAmount || '0'}`}
           </Button>
         </DialogFooter>
       </DialogContent>

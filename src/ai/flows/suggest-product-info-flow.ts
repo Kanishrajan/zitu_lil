@@ -23,7 +23,7 @@ export type SuggestProductInfoInput = z.infer<typeof SuggestProductInfoInputSche
 
 const SuggestProductInfoOutputSchema = z.object({
   description: z.string().describe('A creative and compelling product description, optimized for marketplace listings. It should be around 2-3 sentences long.'),
-  suggestedPrice: z.number().describe('A suggested starting price for the product in USD, based on the product name and image.'),
+  suggestedPrice: z.number().describe('A suggested starting price for the product in INR, based on the product name and image.'),
 });
 export type SuggestProductInfoOutput = z.infer<typeof SuggestProductInfoOutputSchema>;
 
@@ -35,7 +35,7 @@ const prompt = ai.definePrompt({
   name: 'suggestProductInfoPrompt',
   input: { schema: SuggestProductInfoInputSchema },
   output: { schema: SuggestProductInfoOutputSchema },
-  prompt: `You are an expert in e-commerce marketing. Based on the product name and image provided, generate a compelling product description and a reasonable suggested starting price in USD.
+  prompt: `You are an expert in e-commerce marketing. Based on the product name and image provided, generate a compelling product description and a reasonable suggested starting price in INR.
 
 The description should be exciting and highlight key features that would appeal to customers on a B2B marketplace.
 The price should be a simple number, without any currency symbols.
