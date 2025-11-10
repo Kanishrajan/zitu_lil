@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
-import { Bell, Send, Settings, ArrowLeft } from 'lucide-react';
+import { Bell, Send, Settings, ArrowLeft, MapPin } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function Header() {
@@ -14,6 +14,8 @@ export default function Header() {
   const isSettingsPage = pathname.startsWith('/settings');
   const isLeaderboardPage = pathname === '/leaderboard';
   const isMessagesPage = pathname === '/messages';
+  const isNotificationsPage = pathname === '/notifications';
+  const isHomePage = pathname === '/';
 
 
   const handleBack = () => {
@@ -23,11 +25,10 @@ export default function Header() {
   const getTitle = () => {
     if (isSettingsPage) return 'Settings';
     if (isLeaderboardPage) return 'Leaderboard';
-    if (isMessagesPage) return 'Messages';
     return '';
   }
 
-  const showBackButton = isSettingsPage || isLeaderboardPage || isMessagesPage;
+  const showBackButton = isSettingsPage || isLeaderboardPage || isMessagesPage || isNotificationsPage;
   const pageTitle = getTitle();
 
   return (
@@ -38,9 +39,17 @@ export default function Header() {
           <span className="sr-only">Back</span>
         </Button>
       ) : (
-        <Link href="/leaderboard" aria-label="Leaderboard">
-            <Logo className="h-7" />
-        </Link>
+        <div className='flex items-center gap-2'>
+           <Link href="/leaderboard" aria-label="Leaderboard">
+                <Logo className="h-7" />
+            </Link>
+             {isHomePage && (
+                <div className='flex items-center gap-1 text-sm text-muted-foreground'>
+                    <MapPin className='h-4 w-4' />
+                    <span>Mumbai, India</span>
+                </div>
+            )}
+        </div>
       )}
       
       <div className="absolute left-1/2 -translate-x-1/2">

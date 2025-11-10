@@ -38,8 +38,11 @@ function NotificationItem({ notification }: { notification: typeof notifications
 
     const handleClick = () => {
         // In a real app, this would navigate to a chat or details page
-        // e.g., router.push(`/chat/${notification.id}`)
-        console.log(`Notification ${notification.id} clicked.`);
+        if (notification.type === 'order_confirmed' || notification.type === 'bid_won') {
+            router.push(`/orders/${notification.id}`);
+        } else {
+            console.log(`Notification ${notification.id} clicked.`);
+        }
     }
 
     return (
@@ -51,13 +54,18 @@ function NotificationItem({ notification }: { notification: typeof notifications
                 "hover:bg-accent"
             )}
         >
-            <Avatar className="h-10 w-10 border">
-                <AvatarImage src={notification.avatar} alt={notification.from} />
-                <AvatarFallback>{notification.from.charAt(0)}</AvatarFallback>
-            </Avatar>
+            <div className="w-10 h-10 flex items-center justify-center">
+                 {typeIcons[notification.type as keyof typeof typeIcons] || <div className="h-5 w-5" />}
+            </div>
             <div className="flex-1 space-y-1">
-                <p className="text-sm">{notification.text}</p>
-                <p className="text-xs text-muted-foreground">{notification.timestamp}</p>
+                 <div className="flex items-center gap-2">
+                    <Avatar className="h-8 w-8 border">
+                        <AvatarImage src={notification.avatar} alt={notification.from} />
+                        <AvatarFallback>{notification.from.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <p className="text-sm"><span className="font-semibold">{notification.from}</span> {notification.text.replace(notification.from, '')}</p>
+                 </div>
+                <p className="text-xs text-muted-foreground ml-10">{notification.timestamp}</p>
             </div>
             {notification.unread && (
                 <div className="w-2.5 h-2.5 rounded-full bg-primary mt-1 animate-pulse"></div>
@@ -67,11 +75,12 @@ function NotificationItem({ notification }: { notification: typeof notifications
 }
 
 
-function NotificationList({ notifications }: { notifications: typeof notifications.phones }) {
+function NotificationList({ notifications }: { notifications: (typeof notifications.phones[0])[] }) {
+    const sortedNotifications = [...notifications].sort((a,b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
     return (
         <div className="space-y-2">
-            {notifications.length > 0 ? (
-                notifications.map(n => <NotificationItem key={n.id} notification={n} />)
+            {sortedNotifications.length > 0 ? (
+                sortedNotifications.map(n => <NotificationItem key={n.id} notification={n} />)
             ) : (
                 <p className="text-center text-muted-foreground p-8">No notifications here.</p>
             )}
@@ -81,9 +90,9 @@ function NotificationList({ notifications }: { notifications: typeof notificatio
 
 export default function NotificationsPage() {
   return (
-    <div className="container mx-auto px-4 py-4 max-w-2xl">
+    <div className="container mx-auto px-0 md:px-4 py-4 max-w-2xl">
         <div className="space-y-4">
-            <div>
+            <div className='px-4'>
                 <h1 className="text-3xl font-bold tracking-tight">Notifications</h1>
                 <p className="text-muted-foreground">Updates on your business activities.</p>
             </div>
@@ -100,16 +109,16 @@ export default function NotificationsPage() {
                     <Headphones className="h-4 w-4" /> Accessories
                 </TabsTrigger>
             </TabsList>
-            <TabsContent value="all">
-                <NotificationList notifications={[...notifications.phones, ...notifications.furniture, ...notifications.accessories].sort((a,b) => b.id - a.id)} />
+            <TabsContent value="all" className='px-0 md:px-4'>
+                <NotificationList notifications={[...notifications.phones, ...notifications.furniture, ...notifications.accessories]} />
             </TabsContent>
-            <TabsContent value="phones">
+            <TabsContent value="phones" className='px-0 md:px-4'>
                 <NotificationList notifications={notifications.phones} />
             </TabsContent>
-            <TabsContent value="furniture">
+            <TabsContent value="furniture" className='px-0 md:px-4'>
                 <NotificationList notifications={notifications.furniture} />
             </TabsContent>
-            <TabsContent value="accessories">
+            <TabsContent value="accessories" className='px-0 md:px-4'>
                 <NotificationList notifications={notifications.accessories} />
             </TabsContent>
             </Tabs>
