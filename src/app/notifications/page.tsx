@@ -10,17 +10,17 @@ import { Badge } from '@/components/ui/badge';
 
 const notifications = {
   phones: [
-    { id: 1, type: 'bid_accepted', text: 'Apple bid accepted by IKEA for Wooden Furniture supply', timestamp: '2h ago', unread: true, from: 'IKEA', avatar: 'https://picsum.photos/seed/ikea/100' },
-    { id: 2, type: 'new_inquiry', text: 'Samsung received new inquiry from UrbanLadder', timestamp: '5h ago', unread: false, from: 'UrbanLadder', avatar: 'https://picsum.photos/seed/urban/100' },
-    { id: 3, type: 'bid_won', text: 'You won the bid for 10,000 iPhone 15 screens', timestamp: '1d ago', unread: false, from: 'Screen Suppliers', avatar: 'https://picsum.photos/seed/screen/100' },
+    { id: 1, type: 'bid_accepted', text: 'Apple bid accepted by IKEA for Wooden Furniture supply', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), unread: true, from: 'IKEA', avatar: 'https://picsum.photos/seed/ikea/100' },
+    { id: 2, type: 'new_inquiry', text: 'Samsung received new inquiry from UrbanLadder', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5), unread: false, from: 'UrbanLadder', avatar: 'https://picsum.photos/seed/urban/100' },
+    { id: 3, type: 'bid_won', text: 'You won the bid for 10,000 iPhone 15 screens', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), unread: false, from: 'Screen Suppliers', avatar: 'https://picsum.photos/seed/screen/100' },
   ],
   furniture: [
-    { id: 4, type: 'order_confirmed', text: 'Boat Accessories order request confirmed by Pepperfry', timestamp: '3h ago', unread: true, from: 'Pepperfry', avatar: 'https://picsum.photos/seed/pepperfry/100' },
-    { id: 5, type: 'new_bid', text: 'New bid from Samsung for your Oakwood Table set', timestamp: '6h ago', unread: true, from: 'Samsung', avatar: 'https://picsum.photos/seed/samsung/100' },
+    { id: 4, type: 'order_confirmed', text: 'Boat Accessories order request confirmed by Pepperfry', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3), unread: true, from: 'Pepperfry', avatar: 'https://picsum.photos/seed/pepperfry/100' },
+    { id: 5, type: 'new_bid', text: 'New bid from Samsung for your Oakwood Table set', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 6), unread: true, from: 'Samsung', avatar: 'https://picsum.photos/seed/samsung/100' },
   ],
   accessories: [
-    { id: 6, type: 'payment_received', text: 'Payment of $5,000 received from Apple Inc.', timestamp: 'yesterday', unread: false, from: 'Apple', avatar: 'https://picsum.photos/seed/apple/100' },
-    { id: 7, type: 'new_inquiry', text: 'Inquiry about bulk headphone order from OnePlus', timestamp: '2d ago', unread: false, from: 'OnePlus', avatar: 'https://picsum.photos/seed/oneplus/100' },
+    { id: 6, type: 'payment_received', text: 'Payment of $5,000 received from Apple Inc.', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 25), unread: false, from: 'Apple', avatar: 'https://picsum.photos/seed/apple/100' },
+    { id: 7, type: 'new_inquiry', text: 'Inquiry about bulk headphone order from OnePlus', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48), unread: false, from: 'OnePlus', avatar: 'https://picsum.photos/seed/oneplus/100' },
   ]
 };
 
@@ -33,7 +33,23 @@ const typeIcons = {
     bid_won: <CheckCircle className="h-5 w-5 text-green-500" />,
 }
 
-function NotificationItem({ notification }: { notification: typeof notifications.phones[0] }) {
+function formatTimeAgo(timestamp: Date): string {
+    const now = new Date();
+    const seconds = Math.floor((now.getTime() - timestamp.getTime()) / 1000);
+
+    if (seconds < 60) return `${seconds}s ago`;
+    
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+
+    const days = Math.floor(hours / 24);
+    return `${days}d ago`;
+}
+
+function NotificationItem({ notification }: { notification: (typeof notifications.phones[0]) }) {
     const router = useRouter();
 
     const handleClick = () => {
@@ -65,7 +81,7 @@ function NotificationItem({ notification }: { notification: typeof notifications
                     </Avatar>
                     <p className="text-sm"><span className="font-semibold">{notification.from}</span> {notification.text.replace(notification.from, '')}</p>
                  </div>
-                <p className="text-xs text-muted-foreground ml-10">{notification.timestamp}</p>
+                <p className="text-xs text-muted-foreground ml-10">{formatTimeAgo(notification.timestamp)}</p>
             </div>
             {notification.unread && (
                 <div className="w-2.5 h-2.5 rounded-full bg-primary mt-1 animate-pulse"></div>
@@ -76,7 +92,7 @@ function NotificationItem({ notification }: { notification: typeof notifications
 
 
 function NotificationList({ notifications }: { notifications: (typeof notifications.phones[0])[] }) {
-    const sortedNotifications = [...notifications].sort((a,b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    const sortedNotifications = [...notifications].sort((a,b) => b.timestamp.getTime() - a.timestamp.getTime());
     return (
         <div className="space-y-2">
             {sortedNotifications.length > 0 ? (
