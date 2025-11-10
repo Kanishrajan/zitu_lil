@@ -66,7 +66,7 @@ export default function SignUpPage() {
       description: "We've created your account for you.",
     });
     setIsSubmitting(false);
-    router.push('/');
+    router.push('/verify');
   }
 
   return (

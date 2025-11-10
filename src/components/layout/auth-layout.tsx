@@ -7,7 +7,7 @@ import BottomNav from './bottom-nav';
 
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAuthPage = pathname === '/login' || pathname === '/signup';
+  const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/verify';
   const isBiddingArena = pathname.startsWith('/bidding/');
   const isSettingsOrLeaderboard = pathname.startsWith('/settings') || pathname.startsWith('/leaderboard');
   const isChatPage = pathname.startsWith('/messages/');
@@ -17,6 +17,10 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
   // In a real app, you'd have a proper auth state check
   const showBottomNav = !isAuthPage && !isBiddingArena && !isSettingsOrLeaderboard && !isChatPage;
   const showHeader = !isAuthPage && !isBiddingArena && !isChatPage;
+
+  if (isAuthPage) {
+    return <main>{children}</main>;
+  }
 
   return (
     <div className="relative flex min-h-dvh w-full flex-col bg-background">
